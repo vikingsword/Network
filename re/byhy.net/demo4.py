@@ -19,6 +19,10 @@ names = '''
 '''
 newStr = re.sub(r'/av\d+?/', '/cn345677/', names)
 print(newStr)
+print('-------')
+for i in re.findall(r'href=\'(.*?)\'', names):
+    print(i)
+print('-------')
 
 
 # 替换函数，参数是 Match对象
