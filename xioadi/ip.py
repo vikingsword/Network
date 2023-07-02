@@ -8,13 +8,16 @@ def getIpByHost(hostName):
 
 
 if __name__ == '__main__':
+
     # hostName = input('input host: ')
     # getIpByHost(hostName)
 
-    command = input('input your command: ')
-    result = os.system('nslookup ' + command)
-    print(result)
+    # command = input('input your command: ')
+    # result = os.system('nslookup ' + command)
 
+    command = input('input your command: ')
+    res = os.popen('nslookup ' + command)
+    print(res.read())
 
 
 
