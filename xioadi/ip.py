@@ -1,12 +1,11 @@
 import os
 import socket
-
-import whois as whois
+import whois
 
 
 def getIpByHost(hostName):
     ip = socket.gethostbyname(hostName)
-    print(ip)
+    # print(ip)
     return ip
 
 
@@ -43,18 +42,24 @@ if __name__ == '__main__':
     #     print('this port is close')
 
     # 原生自写socket协议tcp，udp扫描 - v2
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host = input('input your host: ')
-    ports = {20, 21, 22, 23, 25, 53, 80, 110, 143, 443, 465, 587, 993, 995, 8080, 8443, 8888}
-    for port in ports:
-        ip = getIpByHost(host)
-        res = server.connect_ex((ip, port))
-        if res == 0:
-            print(port, ' port is open ')
-        else:
-            print(port, ' port is close')
+    # server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # host = input('input your host: ')
+    # ports = {20, 21, 22, 23, 25, 53, 80, 110, 143, 443, 465, 587, 993, 995, 8080, 8443, 8888}
+    # for port in ports:
+    #     ip = getIpByHost(host)
+    #     res = server.connect_ex((ip, port))
+    #     if res == 0:
+    #         print(port, ' port is open ')
+    #     else:
+    #         print(port, ' port is close')
+
 
     # 2. 调用第三方模块扫描
+    url = input('input your url: ')
+    data = whois(url)
+    print(data)
+
+
     # 3. 调用系统工具脚本执行
 
 
