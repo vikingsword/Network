@@ -24,7 +24,8 @@ headers_temp = {
 
 
 def getSoup(target):
-    resp = requests.get(url=target, headers=headers_temp, timeout=0.5)
+    # todo 这里的timeout 最低设置 0.8 ？
+    resp = requests.get(url=target, headers=headers_temp)
     resp.encoding = 'utf-8'
     html = resp.text
     return BeautifulSoup(html, 'html.parser')
@@ -47,6 +48,7 @@ if __name__ == '__main__':
         url = getUrl(search_content, page_num, page_size)
         soup = getSoup(url)
         ips = soup.find_all('a', target='_blank')
+        time.sleep(0.5)
 
         for item in ips:
             with open('fofa_ips.txt', 'a+') as f:
