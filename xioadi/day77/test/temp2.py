@@ -1,6 +1,6 @@
 def remove_duplicate_lines(filename):
     lines_set = set()  # 用于存储唯一行的集合
-    output_filename = "../output.txt"  # 输出文件名
+    output_filename = "../glassfish_fofa_scan/output.txt"  # 输出文件名
 
     # 打开输入文件并读取内容
     with open(filename, 'r') as file:
@@ -18,5 +18,5 @@ def remove_duplicate_lines(filename):
 
 
 # 使用示例
-filename = "../fofa_ips.txt"  # 输入文件名
+filename = "../glassfish_fofa_scan/fofa_ips.txt"  # 输入文件名
 remove_duplicate_lines(filename)

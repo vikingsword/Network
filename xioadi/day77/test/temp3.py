@@ -16,6 +16,6 @@ def deleteDupLine(input_file, output_file):
 
 
 if __name__ == '__main__':
-    input_file = '../input.txt'
-    output_file = '../output.txt'
+    input_file = '../glassfish_fofa_scan/input.txt'
+    output_file = '../glassfish_fofa_scan/output.txt'
     deleteDupLine(input_file, output_file)

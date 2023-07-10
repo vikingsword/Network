@@ -6,6 +6,7 @@ url = 'https://fofa.info/result?qbase64=ImdsYXNzZmlzaCIgJiYgcG9ydD0iNDg0OCI=  &p
 
 '''
 import base64
+import time
 from xml import etree
 
 from bs4 import BeautifulSoup
@@ -23,7 +24,7 @@ headers_temp = {
 
 
 def getSoup(target):
-    resp = requests.get(url=target, headers=headers_temp)
+    resp = requests.get(url=target, headers=headers_temp, timeout=0.5)
     resp.encoding = 'utf-8'
     html = resp.text
     return BeautifulSoup(html, 'html.parser')
@@ -42,13 +43,13 @@ if __name__ == '__main__':
     # page_num = 1
     page_size = 10
 
-    for page_num in range(1, 11):
+    for page_num in range(1, 3):
         url = getUrl(search_content, page_num, page_size)
         soup = getSoup(url)
         ips = soup.find_all('a', target='_blank')
 
         for item in ips:
-            with open('glassfish_fofa_scan/fofa_ips.txt', 'a+') as f:
+            with open('fofa_ips.txt', 'a+') as f:
                 ip = item['href']
                 f.write(ip + "\n")
                 print(ip)
