@@ -6,6 +6,8 @@ url = 'https://fofa.info/result?qbase64=ImdsYXNzZmlzaCIgJiYgcG9ydD0iNDg0OCI=  &p
 
 '''
 import base64
+from xml import etree
+
 from bs4 import BeautifulSoup
 
 import requests
@@ -36,9 +38,14 @@ if __name__ == '__main__':
     ips = soup.find_all('a', target='_blank')
 
     for item in ips:
-        print(item['href'])
+        with open('fofa_ips.txt', 'a+') as f:
+            ip = item['href']
+            f.write(ip + "\n")
+            print(ip)
 
 
-# res = requests.get(url=url).content
-# with open('fofa.txt', 'w', encoding='utf-8') as f:
-#     f.write(res.decode('utf-8'))
+    # lxml写法
+    # soup = etree.HTML(res)
+    # ips = soup.xpath('//div[@class="re-domain"]/a[@target="_blank"]/@href')
+
+
