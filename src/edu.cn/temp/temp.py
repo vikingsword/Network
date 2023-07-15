@@ -1,0 +1,28 @@
+import requests
+from bs4 import BeautifulSoup
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+}
+
+proxies = {
+    'http': 'http://127.0.0.1:10808'
+}
+
+
+def getSchoolUrls():
+    for school_name in open('temp.txt', 'r', encoding='utf-8'):
+        school_name = school_name.strip() + '官网'
+        url = 'https://www.google.com/search?q=' + str(school_name)
+
+        resp = requests.get(url=url, headers=headers, proxies=proxies)
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        school_url = soup.find('cite', class_='apx8Vc tjvcx GvPZzd cHaqb').contents[0]
+
+        with open('school_urls.txt', 'a+', encoding='utf-8') as f:
+            f.write(school_url + '\n')
+    f.close()
+
+
+if __name__ == '__main__':
+    getSchoolUrls()
