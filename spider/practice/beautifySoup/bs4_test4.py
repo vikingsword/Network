@@ -42,29 +42,29 @@ print('--------------')
 
 print(soup.html.parent.name)
 
+print(soup.find_all('b'))
+
+print(soup.find_all('b')[0])
+
+for item in soup.find_all(re.compile('^b')):
+    print(item)
+
+print('------------')
+for item in soup.find_all(re.compile('^title')):
+    print(item)
+
+print('=======')
+
+a_b_tag = soup.find_all(['a', 'b'])
+for item in a_b_tag:
+    print(item)
+
+print('-------------')
 
 
+def has_class_but_no_id(tag):
+    return tag.has_attr('class') and not tag.has_attr('id')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+tag1 = soup.find_all(has_class_but_no_id)
+print(tag1)
