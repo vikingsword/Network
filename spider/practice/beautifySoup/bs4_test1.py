@@ -29,4 +29,26 @@ print(soup.a)
 
 # print(soup.find('a', attrs={'id', 'link2'}))
 
-print(soup.find('a', id='link2'))
+print(soup.find('a', id='link2').text)
+
+# print(soup.find_all('a'))
+
+# convert map to list make this object print in console
+list(map(lambda x: print(x.text), soup.find_all('a')))
+
+print(soup.find(id='link3').text)
+
+# 可以使用 get 也可以用 [] 获取
+for link in soup.find_all('a'):
+    print(link.get('href'))
+
+# get all text in this soup
+print(soup.get_text())
+
+
+
+
+
+
+
+
