@@ -3,7 +3,7 @@ import nmap
 
 def scan(host):
     nm = nmap.PortScanner()
-    nm.scan(hosts=host, arguments='-p 1-1000')  # 你可以在arguments参数中设置Nmap的选项和参数
+    nm.scan(hosts=host, arguments='-p 1-1000')
 
     for host in nm.all_hosts():
         print(f'Host: {host}')
@@ -15,5 +15,5 @@ def scan(host):
 
 
 if __name__ == "__main__":
-    target_host = "127.0.0.1"  # 你的目标主机，可以是单个IP地址或者IP段
+    target_host = "127.0.0.1"
     scan(target_host)
