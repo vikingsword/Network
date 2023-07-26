@@ -17,5 +17,5 @@ def output_md5(input_string):
 
 
 if __name__ == '__main__':
-    for password in open('password.txt', 'r', encoding='utf-8'):
+    for password in open('phpbb.txt', 'r', encoding='utf-8'):
         output_md5(password.strip())
