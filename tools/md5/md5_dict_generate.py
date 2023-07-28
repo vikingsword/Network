@@ -2,6 +2,7 @@ import hashlib
 
 
 def output_md5(input_string):
+
     # 创建一个MD5哈希对象
     md5_hash = hashlib.md5()
 
@@ -11,9 +12,10 @@ def output_md5(input_string):
     # 获取加密后的十六进制表示
     cryption_string = md5_hash.hexdigest()
 
-    return cryption_string
+    with open('md5_dict.txt', 'a+', encoding='utf-8') as f:
+        f.write(input_string + '|' + cryption_string + '\n')
 
 
 if __name__ == '__main__':
-    input_string = input('输入想要加密的字符串： ')
-    print(output_md5(input_string))
+    for password in open('phpbb.txt', 'r', encoding='utf-8'):
+        output_md5(password.strip())
