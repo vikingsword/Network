@@ -13,7 +13,7 @@ tree = etree.HTML(resp)
 hot_cities_li = tree.xpath('//div[@class="hot"]//div[@class="bottom"]/ul/li')
 for li in hot_cities_li:
     hot_city = li.xpath('./a/text()')[0]
-    print(hot_city)
+    # print(hot_city)
 
 # 全部城市
 all_cities_li = tree.xpath('//div[@class="all"]//div[@class="bottom"]/ul/div[2]/li')
@@ -23,3 +23,12 @@ for li in all_cities_li:
     # print(city)
     count += 1
 # print(count)
+
+# 热门城市 + 全部城市
+a_list = tree.xpath('//div[@class="hot"]//div[@class="bottom"]/ul/li/a | //div[@class="all"]//div[@class="bottom"]/ul/div[2]/li/a')
+count2 = 0
+for item in a_list:
+    city = item.xpath('./text()')[0]
+    count2 += 1
+    print(city)
+print(count2)
