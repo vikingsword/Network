@@ -2,6 +2,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 
+
 def get_captcha(url):
     try:
         response = requests.get(url)
@@ -13,6 +14,7 @@ def get_captcha(url):
     except requests.exceptions.RequestException as e:
         print("Error occurred during request:", e)
         return None
+
 
 if __name__ == "__main__":
     # 替换为目标网站的验证码URL
