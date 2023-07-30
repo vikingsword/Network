@@ -1,18 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://m.139w.com/register.asp'
+url = 'https://www.9vps.com/userreg/vcode.asp?id=0.37953683781843'
 
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-    'Cookie': 'PostToken=BjKGnBMD7wBkqE5qRyYnh9StG0HRpl3; ASPSESSIONIDAUCDRRCT=CKFLAMNADPMGFNPDEHPCENCC; ASPSESSIONTDAZBYCXDW=BCD6D9E34A8E2EC4F6300097'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
 }
 
-resp = requests.get(url=url, headers=headers)
+resp = requests.get(url=url, headers=headers).content
 
-soup = BeautifulSoup(resp.text, 'html.parser')
+with open('1.jpg', 'wb') as f:
+    f.write(resp)
 
-src = soup.find('div', class_='yhdl_input2').find('img')
-
-print(src)
+# print(resp)
 
