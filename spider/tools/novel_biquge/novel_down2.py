@@ -10,6 +10,7 @@ headers = {
 }
 
 
+# todo 下载越来越慢
 def get_detail_urls():
     url_main = 'https://www.biquge7.xyz/50416'
 
@@ -30,8 +31,7 @@ async def get_content(url):
         async with await session.get(url=url, headers=headers) as resp:
             res = await resp.text()
             try:
-                content = parse_content(res)
-                file_name = str(re.findall(r'/(\d+)$', url)[0]) + '.txt'
+                content, file_name = parse_content(res)
                 save_to_file('res/' + file_name, content)
             except Exception as e:
                 pass
@@ -43,7 +43,8 @@ def parse_content(response):
     content_list = tree.xpath('//div[@class="list list_text"]/div[@class="text"]/text()')
     content = keep_chinese_with_punctuation(''.join(content_list))
     print('正在下载 ' + title)
-    return str(title + '\n' + content + '\n')
+    file_name = str(re.findall(r'/(\d+)$', url)[0]) + '.txt'
+    return str(title + '\n' + content + '\n'), file_name
 
 
 def save_to_file(file_path, content):
