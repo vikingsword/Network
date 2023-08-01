@@ -24,6 +24,7 @@ import time  # time 计时
 import pickle  # 保存和读取cookie实现免登陆的一个工具
 from time import sleep
 from selenium import webdriver  # 操作浏览器的工具
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 """
@@ -35,7 +36,7 @@ damai_url = 'https://www.damai.cn/'
 # 登录
 login_url = 'https://passport.damai.cn/login?ru=https%3A%2F%2Fwww.damai.cn%2F'
 # 抢票目标页
-target_url = 'https://detail.damai.cn/item.htm?spm=a2oeg.search_category.0.0.749a2ecbX3EHsb&id=699777108426&clicktitle=KY%E4%B9%90%E5%9B%A2%E2%80%9C%E5%85%89%E8%BE%89%E5%B2%81%E6%9C%88%E2%80%9D%E7%BA%AA%E5%BF%B5%E9%BB%84%E5%AE%B6%E9%A9%B9%C2%B7%E8%87%B4%E6%95%ACBEYOND%E5%9B%9B%E5%8D%81%E5%91%A8%E5%B9%B4%E5%B7%A1%E5%9B%9E%E8%A7%86%E5%90%AC%E6%BC%94%E5%94%B1%E4%BC%9A%E2%80%94%E2%80%94(%E4%B8%8A%E6%B5%B7%E7%AB%99%EF%BC%89%E9%BB%84%E8%B4%AF%E4%B8%AD%E5%8A%9B%E8%8D%90%E7%9A%84%E5%A3%B0%E9%9F%B3'
+target_url = 'https://detail.damai.cn/item.htm?spm=a2oeg.home.card_0.ditem_4.7e6023e1M4Ar8u&id=730901974931'
 # target_url = 'https://detail.damai.cn/item.htm?spm=a2oeg.home.card_0.ditem_5.58bf23e15mkXrF&id=723152872451'
 
 
@@ -45,7 +46,8 @@ class Concert:
     def __init__(self):
         self.status = 0  # 状态, 表示当前操作执行到了哪个步骤
         self.login_method = 1  # {0:模拟登录, 1:cookie登录}自行选择登录的方式
-        self.driver = webdriver.Chrome(executable_path='chromedriver.exe')  # 当前浏览器驱动对象
+        s = Service(executable_path='./chromedriver.exe')
+        self.driver = webdriver.Chrome(service=s)  # 当前浏览器驱动对象
 
     # cookies: 登录网站时出现的 记录用户信息用的
     def set_cookies(self):
