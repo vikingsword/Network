@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 # todo 滑动验证如何绕过
-s = Service(executable_path='./chromedriver.exe')
+s = Service(executable_path='../chromedriver.exe')
 bro = webdriver.Chrome(service=s)
 
 url = 'https://qzone.qq.com/'

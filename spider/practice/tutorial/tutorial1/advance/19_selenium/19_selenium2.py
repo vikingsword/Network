@@ -4,7 +4,7 @@ from lxml import etree
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-s = Service(executable_path='./chromedriver.exe')
+s = Service(executable_path='../chromedriver.exe')
 bro = webdriver.Chrome(service=s)
 # 一定要写完整路径
 bro.get('https://www.biquge7.xyz/ph')

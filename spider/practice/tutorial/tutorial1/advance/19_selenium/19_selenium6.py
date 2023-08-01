@@ -13,7 +13,7 @@ chrome_options.add_argument('--disable-gpu')
 # 实现规避检测
 chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 
-s = Service(executable_path='./chromedriver.exe')
+s = Service(executable_path='../chromedriver.exe')
 bro = webdriver.Chrome(service=s, options=chrome_options)
 
 # 无可视化界面(无头浏览器)

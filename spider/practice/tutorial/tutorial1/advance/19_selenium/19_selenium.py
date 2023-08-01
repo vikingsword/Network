@@ -31,7 +31,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-s = Service(executable_path='./chromedriver.exe')
+s = Service(executable_path='../chromedriver.exe')
 bro = webdriver.Chrome(service=s)
 
 bro.get('https://www.baidu.com')

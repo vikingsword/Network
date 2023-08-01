@@ -5,7 +5,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-s = Service(executable_path='./chromedriver.exe')
+s = Service(executable_path='../chromedriver.exe')
 bro = webdriver.Chrome(service=s)
 
 url = 'https://www.runoob.com/try/try.php?filename=jqueryui-api-droppable'
