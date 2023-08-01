@@ -1,5 +1,4 @@
 import scrapy
-import scrapy_pro2
 from ..items import ScrapyPro2Item
 
 '''
@@ -18,6 +17,10 @@ from ..items import ScrapyPro2Item
             - 在配置文件中开启管道
         - 好处：
             - 通用性强
+- 面试题:将爬取到的数据一份存储到本地一份存储到数据库,如何实现?
+    - 管道文件中一个管道类对应的是将数据存储到一种平台
+    - 爬虫文件提交的item只会给管道文件中第一个被执行的管道类接受
+    - process_item中的return item表示将item传递给下一个即将被执行的管道类
 '''
 
 

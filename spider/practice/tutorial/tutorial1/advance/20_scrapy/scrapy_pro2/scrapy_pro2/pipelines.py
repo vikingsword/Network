@@ -38,7 +38,7 @@ class mysqlPipeline(object):
     def process_item(self, item, spider):
         self.cursor = self.conn.cursor()
         try:
-            self.cursor.execute('insert into books2 (name) values("%s")' % (item["title"]))
+            self.cursor.execute('insert into books (name) values("%s")' % (item["title"]))
             self.conn.commit()
         except Exception as e:
             print(e)
