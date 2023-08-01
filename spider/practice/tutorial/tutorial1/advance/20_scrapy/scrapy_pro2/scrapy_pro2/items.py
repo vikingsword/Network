@@ -8,5 +8,5 @@ import scrapy
 
 class ScrapyPro2Item(scrapy.Item):
     # define the fields for your item here like:
-    titles = scrapy.Field()
+    title = scrapy.Field()
     pass

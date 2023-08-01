@@ -64,9 +64,11 @@ LOG_LEVEL = 'ERROR'
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "scrapy_pro2.pipelines.ScrapyPro2Pipeline": 300,
-#}
+ITEM_PIPELINES = {
+   "scrapy_pro2.pipelines.ScrapyPro2Pipeline": 300,
+   "scrapy_pro2.pipelines.mysqlPipeline": 301,
+   # 数值越小，优先级越高
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

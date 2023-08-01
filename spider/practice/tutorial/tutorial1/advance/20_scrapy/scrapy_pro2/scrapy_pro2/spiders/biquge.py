@@ -16,6 +16,8 @@ from ..items import ScrapyPro2Item
             - 将item类型的对象提交给管道进行持久化存储的操作
             - 在管道类的process_item中要将其接受到的item对象中存储的数据进行持久化存储操作
             - 在配置文件中开启管道
+        - 好处：
+            - 通用性强
 '''
 
 
@@ -36,9 +38,8 @@ class BiqugeSpider(scrapy.Spider):
     def parse(self, response):
         # extract() 将selector对象或者selector列表中的data对象提取出来; extract_first() 提取列表中第 0 个列表元素
         title_list = response.xpath('//div[@class="tui"]//div[@class="title"]/a/text()').extract()
-        titles = ''.join(title_list)
-        item = ScrapyPro2Item()
-        titles = item['titles']
-
-        # 将 item 提交给管道
-        yield item
+        for title in title_list:
+            item = ScrapyPro2Item()
+            item['title'] = title
+            # 将 item 提交给管道
+            yield item
