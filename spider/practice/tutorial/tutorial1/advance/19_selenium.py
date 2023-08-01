@@ -1,6 +1,11 @@
 '''
-selenium使用流程：
+selenium 基本使用：
 
+问题：selenium 模块和爬虫之间的关联：
+    - 便捷获取网站中动态加载的数据
+    - 便捷实现模拟登陆
+
+selenium使用流程：
     - 环境安装：pip install selenium — 下载一个浏览器的驱动程序(谷歌浏览器)
     一下载路径：http://chromedriver.storage.googleapis.com/index.html
         -驱动程序和浏览器的映射关系：http://blog.csdn.net/huilan_same/article/det
