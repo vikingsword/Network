@@ -1,4 +1,5 @@
 import scrapy
+
 '''
 scrapy框架的基本使用
     - 环境的安装：
@@ -20,8 +21,9 @@ scrapy框架的基本使用
         - scrapy crawl spiderName
 '''
 
+
 class FirstSpider(scrapy.Spider):
-    # 爬虫文件的名称：就是爬电源文件的一个唯一标识
+    # 爬虫文件的名称：就是爬虫源文件的一个唯一标识
     name = "first"
     # 允许的域名：用来限定start＿urls列表中哪些url可以进行请求发送
     # allowed_domains = ["www.baidu.com"]

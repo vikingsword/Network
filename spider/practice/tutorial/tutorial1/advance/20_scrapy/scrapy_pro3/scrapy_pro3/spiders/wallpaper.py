@@ -14,16 +14,20 @@ import scrapy
 
 class WallpaperSpider(scrapy.Spider):
     name = "wallpaper"
-    # allowed_domains = ["www.sss.com"]
-    start_urls = ['https://pic.netbian.com/4kmeinv/index_1.html']
+    start_urls = ["https://www.xxx.com"]
 
-    # url = 'https://pic.netbian.com/4kmeinv/index_%d.html'
-    # page_num = 1
+    # url 通用模板
+    url = 'xxxx%d.html'
+    page_num = 2
 
     def parse(self, response):
-        # img_name_list = response.xpath('//div[@class="boxgrid"]/a/@title').extract()
-        # for img_name in img_name_list:
-        #     print(img_name)
-        title_list = response.xpath('//div[@class="tui"]//div[@class="title"]/a/text()').extract()
-        for title in title_list:
-            print(title)
+        li_list = response.xpath('xxx')
+        for li in li_list:
+            img_name = li.xpaht('xxxxx').extract_first()
+            print(img_name)
+
+        if self.page_num <= 11:
+            new_url = format(self.url % self.page_num)
+            self.page_num += 1
+            # 手动请求发送： callback 回调函数是专门用作于数据解析
+            yield scrapy.Request(url=new_url, callback=self.parse)
