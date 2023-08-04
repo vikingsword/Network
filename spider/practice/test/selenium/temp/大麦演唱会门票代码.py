@@ -46,7 +46,7 @@ class Concert:
     def __init__(self):
         self.status = 0  # 状态, 表示当前操作执行到了哪个步骤
         self.login_method = 1  # {0:模拟登录, 1:cookie登录}自行选择登录的方式
-        s = Service(executable_path='./chromedriver.exe')
+        s = Service(executable_path='../chromedriver.exe')
         self.driver = webdriver.Chrome(service=s)  # 当前浏览器驱动对象
 
     # cookies: 登录网站时出现的 记录用户信息用的

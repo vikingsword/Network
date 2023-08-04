@@ -17,8 +17,8 @@ from lxml import etree
         /@attrName => img/src/href ....
 '''
 
-# tree = etree.parse('test.html', etree.HTMLParser())
-tree = etree.parse('test.html')
+# tree = etree.parse('temp.html', etree.HTMLParser())
+tree = etree.parse('temp.html')
 # res = tree.xpath('//p[@class="title"]/b')
 res = tree.xpath('//p[@class="story"][1]//a[@id="link2"]/text()')
 res2 = tree.xpath('//p[@class="story"][1]//text()')

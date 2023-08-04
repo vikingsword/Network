@@ -5,7 +5,7 @@ import time
 import requests
 
 
-# weak username passwd test to http://www.smartsunchina.com
+# weak username passwd temp to http://www.smartsunchina.com
 def weak_password_test():
     while q.empty() is not None:
         payload2 = q.get()

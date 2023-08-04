@@ -12,7 +12,7 @@ resp = requests.get('https://api.github.com/events')
 resp2 = requests.post('https://httpbin.org/post', data={'key': 'value'})
 # print(resp2.text)
 
-# set value from dict also can test weak passwd
+# set value from dict also can temp weak passwd
 payload = {'key1': 'value1', 'key2': 'value2'}
 resp3 = requests.get('https://api.github.com/events', params=payload)
 # print(resp3.url)
