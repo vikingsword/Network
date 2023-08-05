@@ -8,9 +8,22 @@ from lxml import etree
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
 }
+base_url = 'https://www.biquge7.xyz'
 
 
-# todo 下载越来越慢
+def get_top_books_url():
+    top_book_list = []
+    for page in range(1, 3):
+        top_url = 'https://www.biquge7.xyz/ph?page=' + str(page)
+        resp = requests.get(url=top_url, headers=headers).content
+        tree = etree.HTML(resp)
+        book_urls = tree.xpath('//div[@class="tui"]//div[@class="title"]/a/@href')
+        for item in book_urls:
+            url = base_url + item
+            top_book_list.append(url)
+    return top_book_list
+
+
 def get_detail_urls():
     url_main = 'https://www.biquge7.xyz/50416'
 
@@ -65,6 +78,7 @@ if __name__ == '__main__':
     #     'https://www.biquge7.xyz/50416/2',
     #     'https://www.biquge7.xyz/50416/3'
     # ]
+
     urls = get_detail_urls()
 
     tasks = []
@@ -74,3 +88,5 @@ if __name__ == '__main__':
         tasks.append(task)
     loop = asyncio.get_event_loop()
     loop.run_until_complete(asyncio.wait(tasks))
+
+
