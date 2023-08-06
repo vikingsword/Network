@@ -29,3 +29,4 @@ if __name__ == '__main__':
     segments = smart_segmentation(text)
     for segment in segments:
         print(segment)
+ 
