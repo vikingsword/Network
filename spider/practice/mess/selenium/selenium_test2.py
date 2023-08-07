@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-s = Service(executable_path='./chromedriver.exe')
+s = Service(executable_path='chromedriver.exe')
 bro = webdriver.Chrome(service=s)
 
 bro.get('https://www.bilibili.com')
