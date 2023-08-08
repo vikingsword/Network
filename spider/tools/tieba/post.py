@@ -28,8 +28,8 @@ url = 'https://tieba.baidu.com/'
 url_follow = 'https://tieba.baidu.com/i/i/forum'
 
 # 帖子信息
-your_title = '8u们，你们好哇，新人求个关注'
-your_content = "wwwww"
+your_title = '8u们，你们好哇'
+your_content = "wwwww吧务为什么删我帖子啊5555"
 
 
 def save_cookie():
@@ -93,7 +93,6 @@ def post():
     # for tieba in tieba_list:
     #     print(tieba)
 
-    # save_cookie(url)
 
     url_temp = 'https://tieba.baidu.com//f?kw=%B1%CC%C0%B6%B5%B5%B0%B8'
     driver.get(url_temp)
@@ -110,8 +109,6 @@ def post():
         button.click()
     except Exception as e:
         pass
-    # for item in title:
-    #     print(item)
 
     time.sleep(2)
 
