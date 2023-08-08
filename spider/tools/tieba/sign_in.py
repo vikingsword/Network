@@ -1,5 +1,5 @@
 '''
-贴吧自动签到脚本
+贴吧自动签到
 '''
 
 import os.path
@@ -29,7 +29,6 @@ url = 'https://tieba.baidu.com/'
 
 
 def save_cookie():
-
     driver.get(url)
     resp = driver.page_source
     tree = etree.HTML(resp)
