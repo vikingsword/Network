@@ -1,16 +1,15 @@
 '''
-贴吧自动签到脚本
+自动发帖
 '''
-
 import os.path
 import pickle
 import time
-
 from lxml import etree
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+
 
 chrome_option = Options()
 # chrome_option.add_argument('--headless')
@@ -23,9 +22,14 @@ s = Service(executable_path='../chromedriver.exe')
 # browser对象 或者是 driver对象
 driver = webdriver.Chrome(service=s, options=chrome_option)
 # 最大化浏览器窗口
-# driver.maximize_window()
+driver.maximize_window()
 
 url = 'https://tieba.baidu.com/'
+url_follow = 'https://tieba.baidu.com/i/i/forum'
+
+# 帖子信息
+your_title = '8u们，你们好哇，新人求个关注'
+your_content = "wwwww"
 
 
 def save_cookie():
@@ -83,21 +87,37 @@ def get_tieba_list():
     return tieba_list
 
 
-def sign_in():
+def post():
     tieba_list = get_tieba_list()
-    for tieba in tieba_list:
-        # print(tieba)
-        driver.get(tieba)
-        driver.maximize_window()
-        time.sleep(0.2)
+    # 想要在所有关注的吧中发帖就把下面代码放到循环中
+    # for tieba in tieba_list:
+    #     print(tieba)
 
-        div = driver.find_element(By.ID, 'signstar_wrapper')
-        div.click()
-        time.sleep(0.3)
+    # save_cookie(url)
+
+    url_temp = 'https://tieba.baidu.com//f?kw=%B1%CC%C0%B6%B5%B5%B0%B8'
+    driver.get(url_temp)
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(2)
+
+    try:
+        title = driver.find_element(By.CLASS_NAME, 'editor_textfield')
+        content = driver.find_element(By.ID, 'ueditor_replace')
+        title.send_keys(your_title)
+        content.send_keys(your_content)
+        time.sleep(1)
+        button = driver.find_element(By.CLASS_NAME, 'poster_submit')
+        button.click()
+    except Exception as e:
+        pass
+    # for item in title:
+    #     print(item)
+
+    time.sleep(2)
+
     input()
-
     driver.quit()
 
 
 if __name__ == '__main__':
-    sign_in()
+    post()

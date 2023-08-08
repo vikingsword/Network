@@ -13,8 +13,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 chrome_option = Options()
-chrome_option.add_argument('--headless')
-chrome_option.add_argument('--disable-gpu')
+# chrome_option.add_argument('--headless')
+# chrome_option.add_argument('--disable-gpu')
 
 # 规避检测
 chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])
