@@ -50,54 +50,49 @@ def save_cookie():
         print('用户已经登陆')
 
 
-def get_tieba_list():
+def add_cookies():
     while True:
         if os.path.exists('cookie.pkl'):
             with open('cookie.pkl', 'rb') as file:
                 cookies = pickle.load(file)
+            driver.get(url)
+            for cookie in cookies:
+                driver.add_cookie(cookie)
+            time.sleep(1)
+
+            driver.refresh()
+            time.sleep(1)
+
             break
         else:
             save_cookie()
 
-    driver.get(url)
-    for cookie in cookies:
-        driver.add_cookie(cookie)
-    time.sleep(2)
 
-    driver.refresh()
-
-    url_follow = 'https://tieba.baidu.com/i/i/forum'
-    driver.get(url_follow)
-    resp = driver.page_source
-    tree = etree.HTML(resp)
-    tr_list = tree.xpath('//div[@class="forum_table"]//tr')
-    tieba_list = []
-    for tr in tr_list:
-        href_list = tr.xpath('./td[1]/a/@href')
-        try:
-            href = href_list[0]
-            tieba_url = url + href
-            tieba_list.append(tieba_url)
-        except Exception as e:
-            pass
-    return tieba_list
+def get_hot_list():
+    # 一共198热门吧
+    add_cookies()
+    hot_list = []
+    for page in range(1, 18):
+        resp = driver.page_source
+        tree = etree.HTML(resp)
+        hrefs = tree.xpath('//div[@id="forum_rcmd"]//li[@class="rcmd_forum_item"]/a/@href')
+        for href in hrefs:
+            hot_url = 'https://tieba.baidu.com' + str(href)
+            hot_list.append(hot_url)
+        driver.find_element(By.ID, 'btnNextPage').click()
+        time.sleep(0.5)
+    return hot_list
 
 
-def sign_in():
-    tieba_list = get_tieba_list()
-    for tieba in tieba_list:
-        # print(tieba)
-        driver.get(tieba)
-        driver.maximize_window()
-        time.sleep(0.2)
-
-        div = driver.find_element(By.ID, 'signstar_wrapper')
-        div.click()
-        time.sleep(0.3)
-    input()
-
-    driver.quit()
+def follow_hot_tieba():
+    hots = get_hot_list()
+    for hot_url in hots:
+        driver.get(hot_url)
+        driver.find_element(By.ID, 'j_head_focus_btn').click()
+        # 操作频繁，无法继续关注，休息下
+        time.sleep(2)
+        # print(hot_url)
 
 
 if __name__ == '__main__':
-    sign_in()
+    follow_hot_tieba()
