@@ -23,7 +23,7 @@ s = Service(executable_path='../chromedriver.exe')
 # browser对象 或者是 driver对象
 driver = webdriver.Chrome(service=s, options=chrome_option)
 # 最大化浏览器窗口
-# driver.maximize_window()
+driver.maximize_window()
 
 url = 'https://tieba.baidu.com/'
 
