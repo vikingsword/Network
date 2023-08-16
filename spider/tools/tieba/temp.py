@@ -1,7 +1,3 @@
-'''
-贴吧自动关注热门吧
-'''
-
 import os.path
 import pickle
 import time
@@ -70,73 +66,33 @@ def add_cookies():
 
 def get_follow_list():
 
+    add_cookies()
     url_follow = 'https://tieba.baidu.com/i/i/forum'
     driver.get(url_follow)
     resp = driver.page_source
     tree = etree.HTML(resp)
-    tr_list = tree.xpath('//div[@class="forum_table"]//tr')
-    tieba_list = []
-    for tr in tr_list:
-        href_list = tr.xpath('./td[1]/a/@href')
-        try:
-            href = href_list[0]
-            tieba_url = url + href
-            tieba_list.append(tieba_url)
-        except Exception as e:
-            pass
-    return tieba_list
 
-
-def get_hot_list():
-    # 一共198热门吧
-    add_cookies()
-    hot_list = list()
-    if os.path.exists('hot_list.txt'):
-        for hot in open('hot_list', 'r', encoding='utf-8'):
-            if hot != '':
-                hot = hot.strip()
-                hot_list.append(hot)
-    else:
-        with open('hot_list.txt', 'a+', encoding='utf-8') as f:
-            for page in range(1, 18):
-                resp = driver.page_source
-                tree = etree.HTML(resp)
-                hrefs = tree.xpath('//div[@id="forum_rcmd"]//li[@class="rcmd_forum_item"]/a/@href')
-                for href in hrefs:
-                    hot_url = 'https://tieba.baidu.com' + str(href)
-                    hot_list.append(hot_url)
-                    f.write(hot_url + '\n')
-                driver.find_element(By.ID, 'btnNextPage').click()
-                time.sleep(0.5)
-    f.close()
-    return hot_list
-
-
-def get_unfollow():
-    all_hot_tieba = list()
-    for url in open('hot_list.txt', 'r', encoding='utf-8'):
-        url = url.strip()
-        all_hot_tieba.append(url)
-    your_follows = get_follow_list()
-
-    unfollow_list = list()
-    for url in all_hot_tieba:
-        if url in your_follows:
-            continue
+    while True:
+        next_page = driver.find_element(By.XPATH, '//div[@id="j_pagebar"]/div/a[3]')
+        follow_list = list()
+        if next_page.text == '下一页':
+            tr_list = tree.xpath('//div[@class="forum_table"]//tr')
+            for tr in tr_list:
+                href_list = tr.xpath('./td[1]/a/@href')
+                try:
+                    href = href_list[0]
+                    tieba_url = url + href
+                    follow_list.append(tieba_url)
+                    next_page.click()
+                    time.sleep(0.5)
+                except Exception as e:
+                    pass
         else:
-            unfollow_list.append(url)
-    return unfollow_list
-
-
-def follow_tieba():
-    unfollows = get_unfollow()
-    for unfollow in unfollows:
-        driver.get(unfollow)
-        driver.find_element(By.ID, 'j_head_focus_btn').click()
-        # 操作频繁，无法继续关注，休息下
-        time.sleep(2)
-        # print(hot_url)
+            return follow_list
 
 
 if __name__ == '__main__':
-    follow_tieba()
+    follow_list = get_follow_list()
+    for follow in follow_list:
+        print(follow)
+
