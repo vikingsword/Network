@@ -69,30 +69,49 @@ def add_cookies():
 
 
 def get_follow_list():
-
+    page_num = 0
+    add_cookies()
     url_follow = 'https://tieba.baidu.com/i/i/forum'
+    # 获取页码
     driver.get(url_follow)
-    resp = driver.page_source
-    tree = etree.HTML(resp)
-    tr_list = tree.xpath('//div[@class="forum_table"]//tr')
-    tieba_list = []
-    for tr in tr_list:
-        href_list = tr.xpath('./td[1]/a/@href')
-        try:
-            href = href_list[0]
-            tieba_url = url + href
-            tieba_list.append(tieba_url)
-        except Exception as e:
-            pass
-    return tieba_list
+    driver.find_element(By.CLASS_NAME, 'pm_i_know').click()
+    driver.implicitly_wait(1)
+    try:
+        last_a = driver.find_elements(By.XPATH, '//div[@id="j_pagebar"]//a')[-1]
+        page_num = last_a.get_attribute('href').split('=')[-1]
+    except Exception as e:
+        pass
+    # print(page_num)
+    url_follow_page = 'https://tieba.baidu.com/i/i/forum?&pn='
+    tieba_list = list()
+    main_url = 'https://tieba.baidu.com'
+    for page in range(1, int(page_num) + 1):
+        page_url = url_follow_page + str(page)
+        driver.get(page_url)
+        resp = driver.page_source
+        tree = etree.HTML(resp)
+        tr_list = tree.xpath('//div[@class="forum_table"]//tr')
 
+        for tr in tr_list:
+            href_list = tr.xpath('./td[1]/a/@href')
+            try:
+                href = href_list[0]
+                tieba_url = main_url + href
+                tieba_list.append(tieba_url)
+            except Exception as e:
+                pass
+    # 持久化
+    with open('your_follows.txt', 'w+', encoding='utf-8') as f:
+        for url in tieba_list:
+            f.write(url + '\n')
+    f.close()
 
 def get_hot_list():
     # 一共198热门吧
     add_cookies()
     hot_list = list()
     if os.path.exists('hot_list.txt'):
-        for hot in open('hot_list', 'r', encoding='utf-8'):
+        for hot in open('hot_list.txt', 'r', encoding='utf-8'):
             if hot != '':
                 hot = hot.strip()
                 hot_list.append(hot)
@@ -108,23 +127,27 @@ def get_hot_list():
                     f.write(hot_url + '\n')
                 driver.find_element(By.ID, 'btnNextPage').click()
                 time.sleep(0.5)
-    f.close()
+    # f.close()
     return hot_list
 
 
 def get_unfollow():
     all_hot_tieba = list()
+    your_follow = list()
     for url in open('hot_list.txt', 'r', encoding='utf-8'):
-        url = url.strip()
-        all_hot_tieba.append(url)
-    your_follows = get_follow_list()
+        all_hot_tieba.append(url.strip())
+    get_follow_list()
+    driver.implicitly_wait(2)
+    for url in open('your_follows.txt', 'r', encoding='utf-8'):
+        your_follow.append(url.strip())
 
     unfollow_list = list()
-    for url in all_hot_tieba:
-        if url in your_follows:
+    for url2 in all_hot_tieba:
+        name = url2.split('=')[-1]
+        if name in your_follow:
             continue
         else:
-            unfollow_list.append(url)
+            unfollow_list.append(url2)
     return unfollow_list
 
 
@@ -134,9 +157,10 @@ def follow_tieba():
         driver.get(unfollow)
         driver.find_element(By.ID, 'j_head_focus_btn').click()
         # 操作频繁，无法继续关注，休息下
-        time.sleep(2)
+        driver.implicitly_wait(2)
         # print(hot_url)
 
 
 if __name__ == '__main__':
+    get_hot_list()
     follow_tieba()
