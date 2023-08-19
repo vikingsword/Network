@@ -37,7 +37,7 @@ def save_cookie():
         print('请扫码登录')
         time.sleep(20)
 
-        with open('../cookie.pkl', 'wb') as file:
+        with open('cookie.pkl', 'wb') as file:
             pickle.dump(driver.get_cookies(), file)
             print('cookie 持久化完成')
         username = tree.xpath('//div[@class="u_menu_item"]/a/span/text()')
@@ -49,8 +49,8 @@ def save_cookie():
 
 def add_cookies():
     while True:
-        if os.path.exists('../cookie.pkl'):
-            with open('../cookie.pkl', 'rb') as file:
+        if os.path.exists('cookie.pkl'):
+            with open('cookie.pkl', 'rb') as file:
                 cookies = pickle.load(file)
             driver.get(url)
             for cookie in cookies:

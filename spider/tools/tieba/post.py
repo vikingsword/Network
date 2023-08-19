@@ -44,7 +44,7 @@ def save_cookie():
         print('请扫码登录')
         time.sleep(10)
 
-        with open('cookie.pkl', 'wb') as file:
+        with open('mess/cookie.pkl', 'wb') as file:
             pickle.dump(driver.get_cookies(), file)
             print('cookie 持久化完成')
         username = tree.xpath('//div[@class="u_menu_item"]/a/span/text()')
@@ -56,8 +56,8 @@ def save_cookie():
 
 def get_tieba_list():
     while True:
-        if os.path.exists('cookie.pkl'):
-            with open('cookie.pkl', 'rb') as file:
+        if os.path.exists('mess/cookie.pkl'):
+            with open('mess/cookie.pkl', 'rb') as file:
                 cookies = pickle.load(file)
             break
         else:

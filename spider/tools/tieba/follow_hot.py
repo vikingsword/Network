@@ -40,7 +40,7 @@ def save_cookie():
         print('请扫码登录')
         time.sleep(20)
 
-        with open('cookie.pkl', 'wb') as file:
+        with open('mess/cookie.pkl', 'wb') as file:
             pickle.dump(driver.get_cookies(), file)
             print('cookie 持久化完成')
         username = tree.xpath('//div[@class="u_menu_item"]/a/span/text()')
@@ -52,8 +52,8 @@ def save_cookie():
 
 def add_cookies():
     while True:
-        if os.path.exists('cookie.pkl'):
-            with open('cookie.pkl', 'rb') as file:
+        if os.path.exists('mess/cookie.pkl'):
+            with open('mess/cookie.pkl', 'rb') as file:
                 cookies = pickle.load(file)
             driver.get(url)
             for cookie in cookies:
@@ -101,7 +101,7 @@ def get_follow_list():
             except Exception as e:
                 pass
     # 持久化
-    with open('your_follows.txt', 'w+', encoding='utf-8') as f:
+    with open('mess/your_follows.txt', 'w+', encoding='utf-8') as f:
         for url in tieba_list:
             f.write(url + '\n')
     f.close()
@@ -110,13 +110,13 @@ def get_hot_list():
     # 一共198热门吧
     add_cookies()
     hot_list = list()
-    if os.path.exists('hot_list.txt'):
-        for hot in open('hot_list.txt', 'r', encoding='utf-8'):
+    if os.path.exists('mess/hot_list.txt'):
+        for hot in open('mess/hot_list.txt', 'r', encoding='utf-8'):
             if hot != '':
                 hot = hot.strip()
                 hot_list.append(hot)
     else:
-        with open('hot_list.txt', 'a+', encoding='utf-8') as f:
+        with open('mess/hot_list.txt', 'a+', encoding='utf-8') as f:
             for page in range(1, 18):
                 resp = driver.page_source
                 tree = etree.HTML(resp)
@@ -134,11 +134,11 @@ def get_hot_list():
 def get_unfollow():
     all_hot_tieba = list()
     your_follow = list()
-    for url in open('hot_list.txt', 'r', encoding='utf-8'):
+    for url in open('mess/hot_list.txt', 'r', encoding='utf-8'):
         all_hot_tieba.append(url.strip())
     get_follow_list()
     driver.implicitly_wait(2)
-    for url in open('your_follows.txt', 'r', encoding='utf-8'):
+    for url in open('mess/your_follows.txt', 'r', encoding='utf-8'):
         your_follow.append(url.strip())
 
     unfollow_list = list()
