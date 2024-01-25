@@ -12,7 +12,7 @@ edge_options.add_argument('headless')
 driver = webdriver.Edge(options=edge_options)
 
 # # 不启用无头模式
-# driver = webdriver.Edge(options=edge_options)
+# driver = webdriver.Edge()
 
 
 # 全局隐式等待20s
