@@ -6,6 +6,8 @@ from selenium.webdriver.chrome.options import Options
 
 base_url = 'https://www.dangdang.com'
 driver = webdriver.Edge()
+# 全局隐式等待20s
+driver.implicitly_wait(20)
 
 # without headers
 # 创建Edge选项对象
@@ -48,9 +50,7 @@ with open('./price.txt', 'a+', encoding='utf-8') as f:
         for li in li_list:
             title = str(li.xpath('./a/@title')[0]).replace(' ', '')
             price = str(li.xpath('./p[@class="price"]/span[@class="search_now_price"]/text()')[0])
-            # print(price)
             f.write(price + '\n')
-            # print(title)
 
 
 time.sleep(3)
