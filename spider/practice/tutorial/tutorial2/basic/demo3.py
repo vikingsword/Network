@@ -2,10 +2,19 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from lxml import etree
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.edge.options import Options
 
 base_url = 'https://www.dangdang.com'
-driver = webdriver.Edge()
+
+# 启用无头模式
+edge_options = Options()
+edge_options.add_argument('headless')
+driver = webdriver.Edge(options=edge_options)
+
+# # 不启用无头模式
+# driver = webdriver.Edge(options=edge_options)
+
+
 # 全局隐式等待20s
 driver.implicitly_wait(20)
 
@@ -13,9 +22,7 @@ driver.implicitly_wait(20)
 # 创建Edge选项对象
 edge_options = Options()
 
-# 启用无头模式
-edge_options.add_argument('--headless')
-edge_options.add_argument('--disable-gpu')
+
 
 driver.get(base_url)
 
