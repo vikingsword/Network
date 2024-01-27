@@ -1,7 +1,5 @@
 # !usr/bin/env python
 # -*- coding:utf-8 _*-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from lxml import etree
 
 
@@ -32,10 +30,10 @@ def get_episode(driver):
 
     if urls.__len__() != episode_list.__len__():
         print('get episode error, try again ')
-        return False, driver
+        return False
     else:
         with open('anime_list.txt', 'w', encoding='utf-8') as f:
             for episode in episode_list:
                 f.write(episode[0] + '|' + episode[1] + '\n')
         print('get episode successfully')
-        return True, driver
+        return True
