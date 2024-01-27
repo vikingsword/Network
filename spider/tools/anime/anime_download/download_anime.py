@@ -105,7 +105,7 @@ if __name__ == '__main__':
     retry_delay = 1
 
     save_path = './result//'
-    save_path = 'F://Video//Anime//test'
+    # save_path = 'F://Video//Anime//test'
 
     driver = init_driver()
 
