@@ -1,5 +1,7 @@
 # !usr/bin/env python
 # -*- coding:utf-8 _*-
+import time
+
 import requests
 
 from get_anime_list import get_episode
@@ -31,8 +33,9 @@ def download_handler(driver, filename, url):
     driver.switch_to.frame(iframe_element)
     iframe_page_source = driver.page_source
     tree = etree.HTML(iframe_page_source)
+    time.sleep(1)
     anime_src = tree.xpath('//video[@id="lelevideo"]/@src')[0]
-    requests.get(anime_src)
+    print("anime_src = ", anime_src)
 
 
 def download_anime(driver):
