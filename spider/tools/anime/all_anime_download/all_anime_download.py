@@ -126,7 +126,7 @@ if __name__ == '__main__':
     max_retries = 5
     retry_delay = 1
 
-    save_path = 'F://Video//Anime//all_anime//'
+    save_path = 'F://Video//Anime//'
 
     driver = init_driver()
     info_list = get_page_urls(driver)
