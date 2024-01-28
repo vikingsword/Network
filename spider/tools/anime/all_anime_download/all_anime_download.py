@@ -45,42 +45,24 @@ def get_page_urls(driver):
         return download_list
 
 
-def download_detail(filename, url):
-    try:
-        # 发送 GET 请求获取视频文件
-        response = requests.get(url, stream=True)
-
-        # 检查请求是否成功
-        response.raise_for_status()
-
-        # 以二进制写入文件
-        path = save_path + filename + ".mp4"
-        with open(path, 'wb') as file:
-            for chunk in response.iter_content(chunk_size=8192):
-                file.write(chunk)
-
-        print(f"Video downloaded successfully to: {path}")
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error downloading video: {e}")
-
-
-def download_handler(filename, url):
-    driver2 = init_driver()
-    driver2.get(url)
-
-    td_element = WebDriverWait(driver2, 30).until(
-        EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
-    )
-
-    iframe_element = td_element.find_element(By.TAG_NAME, 'iframe')
-
-    driver2.switch_to.frame(iframe_element)
-    iframe_page_source = driver2.page_source
-    tree = etree.HTML(iframe_page_source)
-    anime_src = tree.xpath('//video[@id="lelevideo"]/@src')[0]
-    print("anime_src = ", anime_src)
-    download_detail(filename, anime_src)
+def download_anime(list):
+    driver = init_driver()
+    for item in list:
+        dir_path = save_path + item[0] + "//"
+        is_exists = os.path.exists(dir_path)
+        if not is_exists:
+            os.makedirs(dir_path)
+        print("path = ", dir_path)
+        # 下载动漫的每一集
+        for url in item[1]:
+            driver.get(url)
+            # 获取每一集的标题
+            episode_title = driver.title
+            file_name = dir_path + episode_title + ".mp4"
+            print("filename = ", file_name)
+            # 开始下载每集
+            save_download(file_name, url)
+            time.sleep(1)
 
 
 def save_download(file_name, url):
@@ -103,25 +85,41 @@ def save_download(file_name, url):
         print("Max retries reached, giving up.")
 
 
-def download_handler(list):
-    driver = init_driver()
-    for item in list:
-        dir_path = save_path + item[0] + "//"
-        is_exists = os.path.exists(dir_path)
-        if not is_exists:
-            os.makedirs(dir_path)
-        print("path = ", dir_path)
-        # 下载动漫的每一集
-        for url in item[1]:
-            driver.get(url)
-            # 获取每一集的标题
-            episode_title = driver.title
-            file_name = dir_path + episode_title + ".mp4"
-            print("filename = ", file_name)
+def download_handler(filename, url):
+    driver2 = init_driver()
+    driver2.get(url)
 
-            save_download(file_name, url)
+    td_element = WebDriverWait(driver2, 30).until(
+        EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
+    )
 
-            time.sleep(1)
+    iframe_element = td_element.find_element(By.TAG_NAME, 'iframe')
+
+    driver2.switch_to.frame(iframe_element)
+    iframe_page_source = driver2.page_source
+    tree = etree.HTML(iframe_page_source)
+    anime_src = tree.xpath('//video[@id="lelevideo"]/@src')[0]
+    print("anime_src = ", anime_src)
+    download_detail(filename, anime_src)
+
+
+def download_detail(filename, url):
+    try:
+        # 发送 GET 请求获取视频文件
+        response = requests.get(url, stream=True)
+
+        # 检查请求是否成功
+        response.raise_for_status()
+
+        # 以二进制写入文件
+        with open(filename, 'wb') as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
+
+        print(f"Video downloaded successfully to: {filename}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error downloading video: {e}")
 
 
 if __name__ == '__main__':
@@ -132,4 +130,4 @@ if __name__ == '__main__':
 
     driver = init_driver()
     info_list = get_page_urls(driver)
-    download_handler(info_list)
+    download_anime(info_list)
