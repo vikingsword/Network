@@ -44,7 +44,7 @@ def download_detail(filename, url):
 def download_handler(filename, url):
     driver2 = init_driver()
     driver2.get(url)
-
+    print("url_ = ", url)
     td_element = WebDriverWait(driver2, 30).until(
         EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
     )
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     max_retries = 5
     retry_delay = 1
 
-    save_path = 'F://Video//Anime//'
+    save_path = 'F://Video//Anime//all_anime//'
 
     driver = init_driver()
 

@@ -17,7 +17,6 @@ def init_driver():
     edge_option.add_argument('--mute-audio')
     driver = webdriver.Edge(options=edge_option)
     driver.implicitly_wait(30)
-    driver.maximize_window()
     return driver
 
 
@@ -60,6 +59,7 @@ def download_anime(list):
             episode_title = driver.title
             file_name = dir_path + episode_title + ".mp4"
             print("filename = ", file_name)
+            print("url = ", url)
             # 开始下载每集
             save_download(file_name, url)
             time.sleep(1)
@@ -88,7 +88,7 @@ def save_download(file_name, url):
 def download_handler(filename, url):
     driver2 = init_driver()
     driver2.get(url)
-
+    print("url__", url)
     td_element = WebDriverWait(driver2, 30).until(
         EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
     )
@@ -105,6 +105,7 @@ def download_handler(filename, url):
 
 def download_detail(filename, url):
     try:
+        print('开始下载： ', filename.split('//')[-1] + " ......")
         # 发送 GET 请求获取视频文件
         response = requests.get(url, stream=True)
 
