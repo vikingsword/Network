@@ -59,7 +59,6 @@ def download_anime(list):
             episode_title = driver.title
             file_name = dir_path + episode_title + ".mp4"
             print("filename = ", file_name)
-            print("url = ", url)
             # 开始下载每集
             save_download(file_name, url)
             time.sleep(1)
@@ -88,7 +87,7 @@ def save_download(file_name, url):
 def download_handler(filename, url):
     driver2 = init_driver()
     driver2.get(url)
-    print("url__", url)
+    print("url = ", url)
     td_element = WebDriverWait(driver2, 30).until(
         EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
     )
