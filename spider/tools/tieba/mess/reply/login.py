@@ -13,7 +13,7 @@ def scan_login(tree, driver):
     print('请扫码登录')
     time.sleep(20)
     # 覆盖写入
-    with open('./cookie.pkl', 'wb') as file:
+    with open('cookie.pkl', 'wb') as file:
         pickle.dump(driver.get_cookies(), file)
         print('cookie 持久化完成')
     username = tree.xpath('//div[@class="u_menu_item"]/a/span/text()')
@@ -28,8 +28,8 @@ def login_and_save_cookie(driver):
     if login_text == '登录':
         # 未登录，需要登陆，登陆后持久化cookie
         # 先看之前是否保存过 cookie，如果有就读取，cookie可能过期
-        if os.path.exists('./cookie.pkl'):
-            with open('./cookie.pkl', 'rb') as file:
+        if os.path.exists('cookie.pkl'):
+            with open('cookie.pkl', 'rb') as file:
                 cookies = pickle.load(file)
             for cookie in cookies:
                 driver.add_cookie(cookie)
