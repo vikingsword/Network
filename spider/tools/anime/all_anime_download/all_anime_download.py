@@ -34,7 +34,8 @@ def get_page_urls(driver):
             # get every episode url
             tree2 = etree.HTML(page_source)
             # 指定li标签的范围： //ul/li[position() >= 100 and position() <= 200]
-            li_list = tree2.xpath('//div[@id="main0"]//ul/li')
+            # li_list = tree2.xpath('//div[@id="main0"]//ul/li')
+            li_list = tree2.xpath('//div[@id="main0"]//ul/li[position()>=273 and position()<=280]')
             episode_urls = list()
             for li in li_list:
                 href = li.xpath('./a/@href')[0]
