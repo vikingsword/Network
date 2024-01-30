@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 import time
+
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from login import login
+
 from action.reply_a_post import reply_a_post
-
-
+from login import login
 
 if __name__ == '__main__':
     url = 'https://tieba.baidu.com/'

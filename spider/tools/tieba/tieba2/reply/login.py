@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
+import pickle
 import time
+
 from lxml import etree
 from selenium.webdriver.common.by import By
-import pickle
 
 
 def scan_login(tree, driver):

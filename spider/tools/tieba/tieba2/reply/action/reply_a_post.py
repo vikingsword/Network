@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import time
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+
+
 def reply_a_post(driver, url, content):
     post_url = url
     driver.get(post_url)
