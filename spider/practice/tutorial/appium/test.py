@@ -8,7 +8,7 @@ from appium.options.common import AppiumOptions
 desired_caps = {
     'platformName': 'Android',  # 被测手机是安卓
     'platformVersion': '10',  # 手机安卓版本
-    'deviceName': 'xxx',  # 设备名，安卓手机可以随意填写
+    'deviceName': 'A7JC9X1727G00054',  # 设备名，安卓手机可以随意填写
     'appPackage': 'tv.danmaku.bili',  # 启动APP Package名称
     'appActivity': 'tv.danmaku.bili.MainActivityV2',  # 启动Activity名称
     'unicodeKeyboard': True,  # 使用自带输入法，输入中文时填True
