@@ -4,6 +4,7 @@ import time
 import requests
 
 from get_anime_list import get_episode
+from get_anime_list import get_anime_len
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from lxml import etree
@@ -44,7 +45,7 @@ def download_detail(filename, url):
 def download_handler(filename, url):
     driver2 = init_driver()
     driver2.get(url)
-    print("url_ = ", url)
+    print("url = ", url)
     td_element = WebDriverWait(driver2, 30).until(
         EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
     )
@@ -55,8 +56,12 @@ def download_handler(filename, url):
     iframe_page_source = driver2.page_source
     tree = etree.HTML(iframe_page_source)
     anime_src = tree.xpath('//video[@id="lelevideo"]/@src')[0]
-    print("anime_src = ", anime_src)
-    download_detail(filename, anime_src)
+    if anime_src is not None:
+        with open('anime_src.txt', 'w', encoding='utf-8') as f:
+            f.write(filename + '|' + anime_src + '\n')
+        download_detail(filename, anime_src)
+    else:
+        print('anime_src get error')
 
 
 def save_download(file_name, url):
@@ -77,7 +82,6 @@ def save_download(file_name, url):
     else:
         # 如果循环正常结束（未被 break 中断），表示重试次数达到上限
         print("Max retries reached, giving up.")
-
 
 
 def download_anime():
@@ -108,6 +112,7 @@ if __name__ == '__main__':
 
     driver = init_driver()
 
-    flag = get_episode(driver=driver)
-    if flag:
+    if get_anime_len == 0:
+        flag = get_episode(driver=driver)
+    else:
         download_anime()

@@ -5,17 +5,15 @@ from lxml import etree
 
 def get_urls():
     url_list = list()
-    with open('anime_homepage.txt', 'r', encoding='utf-8') as f:
-        for url in f:
-            url = url.strip()
-            url_list.append(url)
+    for url in open('anime_homepage.txt', 'r', encoding='utf-8'):
+        url = url.strip()
+        url_list.append(url)
     return url_list
 
 
 def get_episode(driver):
     urls = get_urls()
     episode_list = list()
-    file_name = None
 
     for url in urls:
         driver.get(url)
@@ -28,12 +26,18 @@ def get_episode(driver):
         episode_url = 'https://www.ntdm9.com' + href
         episode_list.append([file_name, episode_url])
 
-    if urls.__len__() != episode_list.__len__():
-        print('get episode error, try again ')
-        return False
-    else:
-        with open('anime_list.txt', 'w', encoding='utf-8') as f:
-            for episode in episode_list:
-                f.write(episode[0] + '|' + episode[1] + '\n')
-        print('get episode successfully')
-        return True
+    for episode in open('anime_list.txt', 'w', encoding='utf-8'):
+        f.write(episode[0] + '|' + episode[1] + '\n')
+    print('get episode successfully')
+
+
+def get_list_len():
+    count = 0
+    for line in open('anime_list.txt', 'r', encoding='utf-8'):
+        count += 1
+    return count
+
+
+if __name__ == '__main__':
+    i = get_list_len()
+    print(i)
