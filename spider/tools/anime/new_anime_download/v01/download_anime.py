@@ -104,7 +104,7 @@ if __name__ == '__main__':
     max_retries = 5
     retry_delay = 1
 
-    save_path = 'F://Video//Anime//all_anime//'
+    save_path = 'F://Video//Anime//new_anime//'
 
     driver = init_driver()
 

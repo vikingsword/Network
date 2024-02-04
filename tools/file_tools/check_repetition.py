@@ -1,7 +1,7 @@
 # !usr/bin/env python
 # -*- coding:utf-8 _*-
 
-file_path = 'E://Dev//Python//Project//Network//spider//tools//anime//new_anime_download//anime_homepage.txt'
+file_path = '/spider/tools/anime/new_anime_download/v01/anime_homepage.txt'
 list = []
 count = 0
 for line in open(file_path, 'r'):
