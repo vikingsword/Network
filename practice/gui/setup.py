@@ -3,8 +3,8 @@
 from cx_Freeze import setup, Executable
 
 setup(
-    name="YourAppName",
+    name="test gui",
     version="1.0",
-    description="Your application description",
-    executables=[Executable("test1.py")]
+    description="test gui script",
+    executables=[Executable("test1.py", base="Win32GUI", target_name='test_gui.exe')]
 )
