@@ -39,4 +39,15 @@ def reply_img(driver, url):
     action.move_to_element_with_offset(element, 1, 1)
     action.click()
     action.perform()
-    print()
+
+    # 点击上传本地文件
+    page_source = driver.page_source
+    print(page_source.encode('gbk'))
+
+
+    # element2 = driver.find_element(By.XPATH,
+    #                                '//div[@class="edui-popup-body"]//ul[@class="layer_btn_list clearfix"]//li[@class="from_upload"]//a[@class="pic_upload_container"]')
+    # action2 = ActionChains(driver)
+    # action2.move_to_element_with_offset(element2, 1, 1)
+    # action2.click()
+    # action.perform()
