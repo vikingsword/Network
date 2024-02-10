@@ -26,7 +26,7 @@ def get_episode(driver):
         episode_url = 'https://www.ntdm9.com' + href
         episode_list.append([file_name, episode_url])
 
-    for episode in open('anime_list.txt', 'w', encoding='utf-8'):
+    for episode in open('anime_list.txt', 'a+', encoding='utf-8'):
         f.write(episode[0] + '|' + episode[1] + '\n')
     print('get episode successfully')
 

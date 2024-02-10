@@ -90,7 +90,6 @@ def save_download(file_name, url):
         print("Max retries reached, giving up.")
 
 
-
 def download_anime():
     episode_list = list()
     with open('anime_list.txt', 'r', encoding='utf-8') as f:
