@@ -33,6 +33,12 @@ def get_episode(driver):
 
 def get_list_len():
     count = 0
+    try:
+        with open('anime_list.txt', 'x'):
+            pass  # 什么都不做，只是创建文件
+    except FileExistsError:
+        print('get anime list successfully.')
+
     for line in open('anime_list.txt', 'r', encoding='utf-8'):
         count += 1
     return count

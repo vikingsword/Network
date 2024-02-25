@@ -2,7 +2,7 @@
 # -*- coding:utf-8 _*-
 import time
 import requests
-
+import os
 from get_anime_list import get_episode
 from get_anime_list import get_list_len
 from selenium import webdriver
@@ -92,6 +92,7 @@ def save_download(file_name, url):
 
 def download_anime():
     episode_list = list()
+
     with open('anime_list.txt', 'r', encoding='utf-8') as f:
         for line in f:
             line = line.strip()

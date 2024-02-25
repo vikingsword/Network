@@ -1,5 +1,6 @@
 # !usr/bin/env python
 # -*- coding:utf-8 _*-
+import os.path
 import time
 import requests
 
@@ -24,6 +25,7 @@ def init_driver():
 def download_detail(filename, url):
     try:
         # 发送 GET 请求获取视频文件
+        print('start download file ', filename)
         response = requests.get(url, stream=True)
 
         # 检查请求是否成功
@@ -105,6 +107,8 @@ if __name__ == '__main__':
     retry_delay = 1
 
     save_path = 'F://Video//Anime//new_anime//'
+    if not os.path.exists(save_path):
+        os.mkdir(save_path)
 
     driver = init_driver()
 

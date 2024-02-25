@@ -65,7 +65,7 @@ def crawl_page(page):
         progress_bar(downloaded_count, total_files)
 
 
-# 输出进度条
+# 输出
 def progress_bar(count, total):
     percentage = count / total * 100
     bar_length = 50
