@@ -44,7 +44,7 @@ def get_page_urls(driver):
                 episode_urls.append(episode_url)
             # 将 动漫名和该动漫每一页的list作为一个元组放入 download_list 中
             download_list.append([anime_title, episode_urls])
-        return download_list
+    return download_list
 
 
 def download_anime(list):
@@ -55,13 +55,14 @@ def download_anime(list):
         if not is_exists:
             os.makedirs(dir_path)
         print("path = ", dir_path)
+        # print("item[1] = ", item[1])
         # 下载动漫的每一集
         for url in item[1]:
             driver.get(url)
             # 获取每一集的标题
             episode_title = driver.title
             file_name = dir_path + episode_title + ".mp4"
-            print("filename = ", file_name)
+            # print("filename = ", file_name)
             # 开始下载每集
             save_download(file_name, url)
             time.sleep(1)
