@@ -31,7 +31,8 @@ def download_detail(filename, url):
         # 检查请求是否成功
         response.raise_for_status()
 
-        file_size = int(response.headers.get('content-length', 0))
+        bytes_size = int(resp.headers.get('content-length', 0))
+        file_size = round(bytes_size / 1024 / 1024)
 
         # 以二进制写入文件
         path = save_path + filename + ".mp4"
@@ -57,7 +58,7 @@ def download_detail(filename, url):
 def download_handler(filename, url):
     driver2 = init_driver()
     driver2.get(url)
-    print("url_ = ", url)
+    # print("url_ = ", url)
     td_element = WebDriverWait(driver2, 30).until(
         EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
     )
@@ -68,7 +69,7 @@ def download_handler(filename, url):
     iframe_page_source = driver2.page_source
     tree = etree.HTML(iframe_page_source)
     anime_src = tree.xpath('//video[@id="lelevideo"]/@src')[0]
-    print("anime_src = ", anime_src)
+    # print("anime_src = ", anime_src)
     download_detail(filename, anime_src)
 
 
@@ -104,7 +105,7 @@ def download_anime():
     for episode in episode_list:
         file_name = episode[0]
         url = episode[1]
-        print('filename = {}, url = {}'.format(file_name, url))
+        # print('filename = {}, url = {}'.format(file_name, url))
 
         save_download(file_name, url)
 
