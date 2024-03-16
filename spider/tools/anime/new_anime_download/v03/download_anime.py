@@ -116,7 +116,7 @@ if __name__ == '__main__':
     max_retries = 5
     retry_delay = 1
 
-    save_path = 'F://Video//Anime//new_anime2//'
+    save_path = 'F://Video//Anime//new_anime//'
     if not os.path.exists(save_path):
         os.mkdir(save_path)
 
