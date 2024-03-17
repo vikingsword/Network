@@ -116,9 +116,21 @@ def download_detail(filename, url):
         response.raise_for_status()
 
         # 以二进制写入文件
-        with open(filename, 'wb') as file:
-            for chunk in response.iter_content(chunk_size=8192):
-                file.write(chunk)
+        # with open(filename, 'wb') as file:
+        #     for chunk in response.iter_content(chunk_size=8192):
+        #         file.write(chunk)
+        with open(filename, 'wb') as file, tqdm(
+                desc=path,
+                total=file_size,
+                unit='B',
+                unit_scale=True,
+                unit_divisor=8192,
+                colour='#0396ff'
+        ) as bar:
+            response = requests.get(url, stream=True)
+            for data in response.iter_content(chunk_size=8192):
+                bar.update(len(data))
+                file.write(data)
 
         print(f"Video downloaded successfully to: {filename}")
 
