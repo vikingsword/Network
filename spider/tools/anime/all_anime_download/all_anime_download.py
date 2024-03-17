@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import requests
-
+from tqdm import tqdm
 
 def init_driver():
     edge_option = webdriver.EdgeOptions()
@@ -110,15 +110,29 @@ def download_detail(filename, url):
     try:
         print('开始下载： ', filename.split('//')[-1] + " ......")
         # 发送 GET 请求获取视频文件
-        response = requests.get(url, stream=True)
+        response = requests.head(url, stream=True)
 
         # 检查请求是否成功
         response.raise_for_status()
 
+        bytes_size = int(response.headers.get('content-length', 0))
+
         # 以二进制写入文件
-        with open(filename, 'wb') as file:
-            for chunk in response.iter_content(chunk_size=8192):
-                file.write(chunk)
+        # with open(filename, 'wb') as file:
+        #     for chunk in response.iter_content(chunk_size=8192):
+        #         file.write(chunk)
+        with open(filename, 'wb') as file, tqdm(
+                desc=filename,
+                total=bytes_size,
+                unit='B',
+                unit_scale=True,
+                unit_divisor=8192,
+                colour='#0396ff'
+        ) as bar:
+            response = requests.get(url, stream=True)
+            for data in response.iter_content(chunk_size=8192):
+                bar.update(len(data))
+                file.write(data)
 
         print(f"Video downloaded successfully to: {filename}")
 

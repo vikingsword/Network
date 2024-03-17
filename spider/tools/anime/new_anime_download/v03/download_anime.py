@@ -38,7 +38,7 @@ def download_detail(filename, url):
         path = save_path + filename + ".mp4"
         with open(path, 'wb') as file, tqdm(
                 desc=path,
-                total=file_size,
+                total=bytes_size,
                 unit='B',
                 unit_scale=True,
                 unit_divisor=8192,
