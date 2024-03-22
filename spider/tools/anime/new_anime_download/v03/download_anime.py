@@ -4,6 +4,7 @@ import os.path
 import time
 import requests
 from tqdm import tqdm
+
 from get_anime_list import get_episode
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -26,28 +27,25 @@ def download_detail(filename, url):
     try:
         # 发送 GET 请求获取视频文件
         print('start download file ', filename)
+        resp = requests.head(url)
+        resp.raise_for_status()
 
-        response = requests.head(url)
-        # 检查请求是否成功
-        response.raise_for_status()
-
-        bytes_size = int(resp.headers.get('content-length', 0))
-        file_size = round(bytes_size / 1024 / 1024)
-
-        # 以二进制写入文件
-        path = save_path + filename + ".mp4"
-        with open(path, 'wb') as file, tqdm(
-                desc=path,
-                total=bytes_size,
-                unit='B',
-                unit_scale=True,
-                unit_divisor=8192,
-                colour='#0396ff'
+        bytes_size = resp.headers.get('content-length', 0)
+        print("file size = ", bytes_size)
+        with open(path, 'web') as file, tqdm(
+            desc=path,
+            total=bytes_size,
+            unit='B',
+            unit_scale=True,
+            unit_divisor=8192,
+            colour='#0396ff'
         ) as bar:
-            response = requests.get(url, stream=True)
-            for data in response.iter_content(chunk_size=8192):
+            resp = requests.get(url, stream=True)
+            for data in resp.iter_content(chunk_size=2048):
                 bar.update(len(data))
                 file.write(data)
+
+
 
         print(f"Video downloaded successfully to: {path}")
 
@@ -58,7 +56,7 @@ def download_detail(filename, url):
 def download_handler(filename, url):
     driver2 = init_driver()
     driver2.get(url)
-    # print("url_ = ", url)
+    print("url_ = ", url)
     td_element = WebDriverWait(driver2, 30).until(
         EC.presence_of_element_located((By.XPATH, '//table//td[@id="playleft"]'))
     )
@@ -69,7 +67,7 @@ def download_handler(filename, url):
     iframe_page_source = driver2.page_source
     tree = etree.HTML(iframe_page_source)
     anime_src = tree.xpath('//video[@id="lelevideo"]/@src')[0]
-    # print("anime_src = ", anime_src)
+    print("anime_src = ", anime_src)
     download_detail(filename, anime_src)
 
 
@@ -93,6 +91,7 @@ def save_download(file_name, url):
         print("Max retries reached, giving up.")
 
 
+
 def download_anime():
     episode_list = list()
     with open('anime_list.txt', 'r', encoding='utf-8') as f:
@@ -105,7 +104,7 @@ def download_anime():
     for episode in episode_list:
         file_name = episode[0]
         url = episode[1]
-        # print('filename = {}, url = {}'.format(file_name, url))
+        print('filename = {}, url = {}'.format(file_name, url))
 
         save_download(file_name, url)
 
@@ -124,10 +123,5 @@ if __name__ == '__main__':
     driver = init_driver()
 
     flag = get_episode(driver=driver)
-    try:
-        if flag:
-            download_anime()
-    finally:
-        os.remove('anime_list.txt')
-
-
+    if flag:
+        download_anime()
