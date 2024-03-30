@@ -3,7 +3,6 @@
 import os.path
 import time
 import requests
-from tqdm import tqdm
 
 from get_anime_list import get_episode
 from selenium import webdriver
@@ -27,26 +26,27 @@ def download_detail(filename, url):
     try:
         # 发送 GET 请求获取视频文件
         print('start download file ', filename)
-        resp = requests.head(url)
-        resp.raise_for_status()
+        response = requests.head(url, stream=True)
 
-        bytes_size = resp.headers.get('content-length', 0)
-        print("file size = ", bytes_size)
-        with open(path, 'web') as file, tqdm(
-            desc=path,
+        # 检查请求是否成功
+        response.raise_for_status()
+
+        bytes_size = int(response.headers.get('content-length', 0))
+
+        # 以二进制写入文件
+        path = save_path + filename + ".mp4"
+        with open(path, 'wb') as file, tqdm(
+            desc=filename,
             total=bytes_size,
             unit='B',
             unit_scale=True,
             unit_divisor=8192,
             colour='#0396ff'
         ) as bar:
-            resp = requests.get(url, stream=True)
-            for data in resp.iter_content(chunk_size=2048):
+            response = requests.get(url, stream=True)
+            for data in response.iter_content(chunk_size=8192):
                 bar.update(len(data))
                 file.write(data)
-
-
-
         print(f"Video downloaded successfully to: {path}")
 
     except requests.exceptions.RequestException as e:

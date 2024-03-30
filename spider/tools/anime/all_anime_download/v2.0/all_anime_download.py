@@ -105,7 +105,6 @@ def download_handler(filename, url):
     tree = etree.HTML(iframe_page_source)
     anime_src = tree.xpath('//video[@id="lelevideo"]/@src')[0]
     print("anime_src = ", anime_src)
-                                                                                                                                                                                                                                                                                                                          download_detail(filename, anime_src)
 
 
 def download_detail(filename, url):
