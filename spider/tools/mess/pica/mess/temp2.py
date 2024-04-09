@@ -9,7 +9,7 @@ chrome_option = Options()
 
 chrome_option.add_experimental_option('excludeSwitches', ['enable-automation'])
 
-s = Service(executable_path='../../chromedriver.exe')
+s = Service(executable_path='../../../chromedriver.exe')
 
 driver = webdriver.Chrome(service=s, options=chrome_option)
 
