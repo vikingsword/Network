@@ -15,6 +15,6 @@ class crawl(spider.Spider):
                 "text": quote.css('span.text::text').get(),
             }
 
-        page_next = response.css('li.text a::attr("href")').get()
-        if page_next is not None:
-            yield response.follow(self, page_next)
+        next_page = response.css('li.next a::attr("href")').get()
+        if next_page is not None:
+            yield response.follow(page_next, self.parse)
