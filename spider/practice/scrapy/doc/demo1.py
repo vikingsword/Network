@@ -2,7 +2,7 @@
 # -*- coding:utf-8 _*-
 import scrapy
 
-# command : scrapy runspider demo1.py -o quotes.jsonl
+# command : scrapy runspider demo.py -o quotes.jsonl
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
     start_urls = [
