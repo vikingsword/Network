@@ -3,6 +3,8 @@
 import scrapy
 from pathlib import Path
 
+# command : scrapy crawl quotes2
+
 class QuotesSpider(scrapy.Spider):
     name = 'quotes2'
     start_urls = [
