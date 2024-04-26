@@ -20,7 +20,7 @@ USER_AGENT = "User-Agent:Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 4
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -96,7 +96,7 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 # 日志级别 CRITICAL, ERROR, WARNING, INFO, DEBUG
-LOG_LEVEL = 'WARNING'
+LOG_LEVEL = 'DEBUG'
 
 # 如果等于True，所有的标准输出（包括错误）都会重定向到日志，例如：print('hello')
 LOG_STDOUT = False
