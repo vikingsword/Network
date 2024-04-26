@@ -65,9 +65,10 @@ RANDOMIZE_DOWNLOAD_DELAY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "demo3.pipelines.Demo3Pipeline": 300,
-#}
+# 管道配置文件，数字越小优先级越高
+ITEM_PIPELINES = {
+   "demo3.pipelines.Demo3Pipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
