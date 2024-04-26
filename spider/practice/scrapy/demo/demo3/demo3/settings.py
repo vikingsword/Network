@@ -67,7 +67,8 @@ RANDOMIZE_DOWNLOAD_DELAY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # 管道配置文件，数字越小优先级越高
 ITEM_PIPELINES = {
-   "demo3.pipelines.Demo3Pipeline": 300,
+   "demo3.pipelines.DbPipeline": 200,
+   "demo3.pipelines.ExcelPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
