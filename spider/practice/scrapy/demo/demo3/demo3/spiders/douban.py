@@ -1,3 +1,5 @@
+# !usr/bin/env python
+# -*- coding:utf-8 _*-
 from typing import Iterable
 
 import scrapy
@@ -12,25 +14,37 @@ class DoubanSpider(scrapy.Spider):
     allowed_domains = ["movie.douban.com"]
     start_urls = ["https://movie.douban.com/top250"]
 
-    # Ò»¿ªÊ¼Ö±½Ó½«url¸øÒýÇæ
+    # ä¸€å¼€å§‹ç›´æŽ¥å°†urlç»™å¼•æ“Ž
     def start_requests(self):
-        for page in range(10):
+        for page in range(1):
             yield Request(url=f'https://movie.douban.com/top250?start={page * 25}&filter=')
 
     def parse(self, response: HtmlResponse, **kwargs):
         sel = Selector(response)
         list_items = sel.css('#content > div > div.article > ol > li')
         for list_item in list_items:
+            detail_url = list_item.css('div.info > div.hd > a::attr(href)').extract_first()
             movie = MovieItem()
             movie['title'] = list_item.css('span.title::text').extract_first()
             movie['rank'] = list_item.css('span.rating_num::text').extract_first()
             movie['subject'] = list_item.css('span.inq::text').extract_first()
-            # ÕâÀï²»ÄÜ·µ»Ø£¬¶øÊÇÒªÊ¹ÓÃÉú³ÉÆ÷£¬½«²úÉúµÄÊý¾Ý½»¸øÒýÇæ£¬ÒýÇæÔÙ½»¸ø¹ÜµÀ
-            # print('movie')
-            yield movie
+            # è¿™é‡Œä¸èƒ½è¿”å›žï¼Œè€Œæ˜¯è¦ä½¿ç”¨ç”Ÿæˆå™¨ï¼Œå°†äº§ç”Ÿçš„æ•°æ®äº¤ç»™å¼•æ“Žï¼Œå¼•æ“Žå†äº¤ç»™ç®¡é“
+            # yield movie
+            yield Request(
+                url=detail_url,
+                callback=self.parse_detail,
+                cb_kwargs={'item': movie}
+            )
 
-        # °´ÕÕÏÂÃæµÄÐ´·¨»òÕß def start_request():
+        # æŒ‰ç…§ä¸‹é¢çš„å†™æ³•æˆ–è€… def start_request():
         # href_list = sel.css('div.paginator > a::attr(href)')
         # for href in href_list:
         #     url = response.urljoin(href.extract())
         #     yield Request(url)
+
+    def parse_detail(self, response: HtmlResponse, **kwargs):
+        movie = kwargs['item']
+        sel = Selector(response)
+        movie['duration'] = sel.css('span[property="v:runtime"]::attr(content)').extract()
+        movie['intro'] = sel.css('span[property="v:summary"]::text').extract_first()
+        yield movie

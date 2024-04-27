@@ -29,7 +29,9 @@ class DbPipeline:
         title = item.get('title', '')
         rank = item.get('rank', 0.0)
         subject = item.get('subject', '')
-        self.data.append((title, rank, subject))
+        duration = item.get('duration', 0)
+        intro = item.get('intro', '')
+        self.data.append((title, rank, subject, duration, intro))
         if len(self.data) == 100:
             self._execute()
             self.data.clear()
@@ -37,7 +39,7 @@ class DbPipeline:
 
     def _execute(self):
         self.cursor.executemany(
-            'insert into top_movie (`title`, `rank`, `subject`) values (%s, %s, %s)',
+            'insert into top_movie (`title`, `rank`, `subject`, `duration`, `intro`) values (%s, %s, %s, %s, %s)',
             self.data
         )
         self.conn.commit()
@@ -49,7 +51,7 @@ class ExcelPipeline:
         self.wb = openpyxl.Workbook()
         self.ws = self.wb.active
         self.ws.title = 'top250'
-        self.ws.append(('标题', '评分', '主题'))
+        self.ws.append(('标题', '评分', '主题', '时长', '简介'))
 
     # def open_spider(self):
     #     pass
@@ -59,7 +61,9 @@ class ExcelPipeline:
 
     def process_item(self, item, spider):
         title = item.get('title', '')
-        rank = item.get('rank') or ''
+        rank = item.get('rank', 0.0)
         subject = item.get('subject', '')
-        self.ws.append((title, rank, subject))
+        duration = item.get('duration', 0)
+        intro = item.get('intro', '')
+        self.ws.append((title, rank, subject, duration, intro))
         return item

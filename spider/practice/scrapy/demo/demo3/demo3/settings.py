@@ -53,9 +53,9 @@ RANDOMIZE_DOWNLOAD_DELAY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "demo3.middlewares.Demo3DownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   "demo3.middlewares.Demo3DownloaderMiddleware": 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html

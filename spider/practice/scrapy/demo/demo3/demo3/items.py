@@ -1,3 +1,5 @@
+# !usr/bin/env python
+# -*- coding:utf-8 _*-
 # Define here the models for your scraped items
 #
 # See documentation in:
@@ -6,10 +8,12 @@
 import scrapy
 
 
-# 爬取到的数据组装成item对象
+# 鐖彇鍒扮殑鏁版嵁缁勮鎴恑tem瀵硅薄
 class MovieItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     title = scrapy.Field()
     rank = scrapy.Field()
     subject = scrapy.Field()
+    duration = scrapy.Field()
+    intro = scrapy.Field()
