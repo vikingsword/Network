@@ -1,4 +1,4 @@
-# Scrapy settings for demo3 project
+# Scrapy settings for demo4 project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,28 +7,25 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "demo3"
+BOT_NAME = "demo4"
 
-SPIDER_MODULES = ["demo3.spiders"]
-NEWSPIDER_MODULE = "demo3.spiders"
+SPIDER_MODULES = ["demo4.spiders"]
+NEWSPIDER_MODULE = "demo4.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = "User-Agent:Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36"
+#USER_AGENT = "demo4 (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 16
+#CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# 下载延迟
-DOWNLOAD_DELAY = 3
-# 随机化下载延迟
-RANDOMIZE_DOWNLOAD_DELAY = True
+#DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -48,14 +45,14 @@ RANDOMIZE_DOWNLOAD_DELAY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "demo3.middlewares.Demo3SpiderMiddleware": 543,
+#    "demo4.middlewares.Demo4SpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-   "demo3.middlewares.Demo3DownloaderMiddleware": 543,
-}
+#DOWNLOADER_MIDDLEWARES = {
+#    "demo4.middlewares.Demo4DownloaderMiddleware": 543,
+#}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -65,11 +62,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# 管道配置文件，数字越小优先级越高
-ITEM_PIPELINES = {
-   "demo3.pipelines.DbPipeline": 200,
-   "demo3.pipelines.ExcelPipeline": 300,
-}
+#ITEM_PIPELINES = {
+#    "demo4.pipelines.Demo4Pipeline": 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -96,12 +91,3 @@ ITEM_PIPELINES = {
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
-
-# 日志级别 CRITICAL, ERROR, WARNING, INFO, DEBUG
-LOG_LEVEL = 'DEBUG'
-
-# 如果等于True，所有的标准输出（包括错误）都会重定向到日志，例如：print('hello')
-LOG_STDOUT = False
-
-# 如果等于True，日志仅仅包含根路径，False显示日志输出组件
-LOG_SHORT_NAMES = False

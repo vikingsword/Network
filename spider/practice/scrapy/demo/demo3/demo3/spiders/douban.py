@@ -45,6 +45,6 @@ class DoubanSpider(scrapy.Spider):
     def parse_detail(self, response: HtmlResponse, **kwargs):
         movie = kwargs['item']
         sel = Selector(response)
-        movie['duration'] = sel.css('span[property="v:runtime"]::attr(content)').extract()
-        movie['intro'] = sel.css('span[property="v:summary"]::text').extract_first()
+        movie['duration'] = sel.css('span[property="v:runtime"]::attr(content)').extract_first()
+        movie['intro'] = sel.css('span[property="v:summary"]::text').extract_first().strip()
         yield movie
