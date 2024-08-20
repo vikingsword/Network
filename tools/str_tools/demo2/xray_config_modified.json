@@ -1,0 +1,151 @@
+{
+  "api": {
+    "services": [
+      "HandlerService",
+      "LoggerService",
+      "StatsService"
+    ],
+    "tag": "api"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 62789,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "127.0.0.1"
+      },
+      "tag": "api"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "ip10",
+      "sendThrough": "149.52.113.10",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip9",
+      "sendThrough": "149.52.113.9",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip8",
+      "sendThrough": "149.52.113.8",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip7",
+      "sendThrough": "149.52.113.7",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip6",
+      "sendThrough": "149.52.113.6",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip5",
+      "sendThrough": "149.52.113.5",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip4",
+      "sendThrough": "149.52.113.4",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip3",
+      "sendThrough": "149.52.113.3",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "ip2",
+      "sendThrough": "149.52.113.2",
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ],
+  "policy": {
+    "system": {
+      "statsInboundDownlink": true,
+      "statsInboundUplink": true
+    }
+  },
+  "routing": {
+    "rules": [
+      {
+        "inboundTag": [
+          "inbound-20010"
+        ],
+        "outboundTag": "ip10",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20009"
+        ],
+        "outboundTag": "ip9",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20008"
+        ],
+        "outboundTag": "ip8",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20007"
+        ],
+        "outboundTag": "ip7",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20006"
+        ],
+        "outboundTag": "ip6",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20005"
+        ],
+        "outboundTag": "ip5",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20004"
+        ],
+        "outboundTag": "ip4",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20003"
+        ],
+        "outboundTag": "ip3",
+        "type": "field"
+      },
+      {
+        "inboundTag": [
+          "inbound-20002"
+        ],
+        "outboundTag": "ip2",
+        "type": "field"
+      }
+    ]
+  },
+  "stats": {}
+}
