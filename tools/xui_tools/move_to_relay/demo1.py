@@ -35,6 +35,7 @@ with open('res.txt', 'a+') as f:
         res = output_str.replace(" ", "")
         f.write(res + "\n")
         print(res)
+        print()
 
 print(cou)
 # 提交事务并关闭连接
