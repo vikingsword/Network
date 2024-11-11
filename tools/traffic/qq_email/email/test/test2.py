@@ -18,7 +18,7 @@ smtp.login(EMAIL_ADD, EMAIL_PASS)
 
 # 构建邮件内容
 sender = EMAIL_ADD
-receiver = 'receiver_email@example.com'  # 收件人地址需要填写实际的邮箱
+receiver = EMAIL_ADD  # 收件人地址需要填写实际的邮箱
 subject = 'hello'
 body = 'this is vikingar!'
 msg = f'Subject: {subject}\n\n{body}'

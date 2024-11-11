@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击链接跳转不同地址</title>
+    <style>
+        .link {
+            font-size: 18px;
+            color: #3b5998;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h3>点击下方链接跳转到不同的地址：</h3>
+<a class="link" onclick="rotateLink()">点击我跳转</a>
+
+<script>
+    // 定义多个跳转地址
+    const urls = [
+        "https://www.example.com",
+        "https://www.google.com",
+        "https://www.wikipedia.org"
+    ];
+
+    // 用于记录当前点击的次数
+    let clickCount = 0;
+
+    function rotateLink() {
+        // 获取当前需要跳转的 URL
+        const url = urls[clickCount % urls.length];
+
+        // 跳转到该 URL
+        window.location.href = url;
+
+        // 更新点击次数
+        clickCount++;
+    }
+</script>
+
+</body>
+</html>
