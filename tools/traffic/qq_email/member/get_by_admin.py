@@ -1,7 +1,6 @@
 # !usr/bin/env python
 # -*- coding:utf-8 _*-
-# !usr/bin/env python
-# -*- coding:utf-8 _*-
+# cookie 方式容易失效
 import requests
 
 # URL and parameters
@@ -40,9 +39,10 @@ response = requests.get(url, headers=headers, cookies=cookies)
 # Check if the request was successful
 if response.status_code == 200:
     data = response.json()  # assuming the response is JSON
-    first_items = [member_id for member_id in data['members'].keys()]
-    print(first_items)
-    print(len(first_items))
+    print(data)
+    # first_items = [member_id for member_id in data['members'].keys()]
+    # print(first_items)
+    # print(len(first_items))
 
 else:
     print(f"Failed to retrieve data. Status code: {response.status_code}")
