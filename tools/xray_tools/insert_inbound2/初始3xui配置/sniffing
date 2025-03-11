@@ -1,0 +1,38 @@
+ss:
+{
+  "enabled": false,
+  "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+  ],
+  "metadataOnly": false,
+  "routeOnly": false
+}
+
+vmess:
+{
+  "enabled": false,
+  "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+  ],
+  "metadataOnly": false,
+  "routeOnly": false
+}
+
+socks5:
+{
+  "enabled": false,
+  "destOverride": [
+    "http",
+    "tls",
+    "quic",
+    "fakedns"
+  ],
+  "metadataOnly": false,
+  "routeOnly": false
+}

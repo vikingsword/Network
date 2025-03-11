@@ -1,0 +1,56 @@
+ss:
+{
+  "method": "aes-256-gcm",
+  "password": "w6TDojDCmjjCgsOaw57CpsKDCMOVw43DvXHDj8OzwozDk1bDu8KiwpfDvX/DpzLDg8K5wqkiAw==",
+  "network": "tcp,udp",
+  "clients": [
+    {
+      "method": "aes-256-gcm",
+      "password": "w6rDqWXDvcOEMcKaMsO5djvDqBnClsKewpPCrD1Cw4UtCCTCjMKLIcOOwqTCjQrDs2c=",
+      "email": "6zz4q1dt",
+      "limitIp": 0,
+      "totalGB": 0,
+      "expiryTime": 0,
+      "enable": true,
+      "tgId": "",
+      "subId": "ididwsy57ajhji7z",
+      "comment": "",
+      "reset": 0
+    }
+  ],
+  "ivCheck": false
+}
+
+vmess:
+{
+  "clients": [
+    {
+      "id": "f19fe589-ff8b-49dd-9d09-b0258c9985f1",
+      "security": "auto",
+      "email": "73l8cldu",
+      "limitIp": 0,
+      "totalGB": 0,
+      "expiryTime": 0,
+      "enable": true,
+      "tgId": "",
+      "subId": "kpb3u2aem3zknquv",
+      "comment": "",
+      "reset": 0
+    }
+  ]
+}
+
+socks5:
+{
+  "auth": "password",
+  "accounts": [
+    {
+      "user": "2voSPVReLV",
+      "pass": "zSOWAE4pA9"
+    }
+  ],
+  "udp": false,
+  "ip": "127.0.0.1"
+}
+
+

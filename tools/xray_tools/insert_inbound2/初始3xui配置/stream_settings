@@ -1,0 +1,27 @@
+ss:
+{
+  "network": "tcp",
+  "security": "none",
+  "externalProxy": [],
+  "tcpSettings": {
+    "acceptProxyProtocol": false,
+    "header": {
+      "type": "none"
+    }
+  }
+}
+
+vmess:
+{
+  "network": "tcp",
+  "security": "none",
+  "externalProxy": [],
+  "tcpSettings": {
+    "acceptProxyProtocol": false,
+    "header": {
+      "type": "none"
+    }
+  }
+}
+
+
